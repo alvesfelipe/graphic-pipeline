@@ -315,7 +315,7 @@ int main(int argc, char *argv[])
 
 			p_saida = &saida;
 			
-			saida.open("saida.txt");
+			saida.open("../pipeline/files/saida.txt");
 			//*p_saida << "testeeeee222222";	
 			PrintModelInfo(objData, p_saida);
 			saida.close();
