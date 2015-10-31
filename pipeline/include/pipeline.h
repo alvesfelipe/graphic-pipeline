@@ -13,6 +13,7 @@
 #include <math.h>
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -25,9 +26,9 @@ class Pipeline{
 		glm::mat4 modelMatrix();
 		glm::mat4 translateMatrix(float x, float y, float z);
 		glm::mat4 scaleMatrix(float x, float y, float z);
-		glm::mat4 rotateX(float angle, float x);
-		glm::mat4 rotateY(float angle, float y);	
-		glm::mat4 rotateZ(float angle, float z);
+		glm::mat4 rotateX(float angle);
+		glm::mat4 rotateY(float angle);	
+		glm::mat4 rotateZ(float angle);
 
 		//view functions
 		glm::vec3 normaCorrection(glm::vec3 vect);
@@ -44,6 +45,15 @@ class Pipeline{
 
 		//print to screen
 		glm::vec4 printScreen(glm::vec4 canonical, int width, int heigth);
+
+		//set vector with all vertex
+		vector<glm::vec4> setVector(char *argv[]);
+
+		//set vector with all faces
+		vector<glm::vec3> setFaces(char *argv[]);
+
+		//print pixels
+		void printPixels(vector<glm::vec4> v);
 
 		void test();
 };

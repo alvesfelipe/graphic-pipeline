@@ -3,6 +3,7 @@
 
 #include "definitions.h"
 #include <math.h>
+#include "../pipeline/include/pipeline.h"
 
 //*****************************************************************************
 // Defina aqui as suas funções gráficas
@@ -10,10 +11,11 @@
 
 typedef struct pixel {
 	
-	int x, y;
+	float x, y;
 	int RGBA[4];
 
 }Pixel;
+
 
 void putLinha(int R, int G, int B, int A){
 
@@ -164,7 +166,42 @@ void drawTriangle(Pixel p0, Pixel p1, Pixel p2){
 	drawLine(p2,p0);
 }
 
+void printVectorPixel(std::vector<glm::vec4> v){
+    Pixel p;
+    int i = 0;
 
+    while(i != v.size()){
+        p.x = v[i][0];
+        p.y = v[i][1];   
+        p.RGBA[0] = 0;
+        p.RGBA[1] = 255;
+        p.RGBA[2] = 0;
+        p.RGBA[3] = 255;
+        
+        putPixel(p, p);
+
+        i++;
+    }
+}
+
+void printTriangles(std::vector<glm::vec4> vertex, std::vector<glm::vec3> faces){
+    Pixel p1, p2, p3;
+    int i = 0;
+
+    p1.RGBA[0] = 0; p1.RGBA[1] = 255; p1.RGBA[2] = 0; p1.RGBA[3] = 255;
+    p2.RGBA[0] = 0; p2.RGBA[1] = 255; p2.RGBA[2] = 0; p2.RGBA[3] = 255;
+    p3.RGBA[0] = 0; p3.RGBA[1] = 255; p3.RGBA[2] = 0; p3.RGBA[3] = 255;
+
+    while(i != faces.size()){
+        p1.x = vertex[faces[i][0]][0]; p1.y = vertex[faces[i][0]][1];   
+        p2.x = vertex[faces[i][1]][0]; p2.y = vertex[faces[i][1]][1];
+        p3.x = vertex[faces[i][2]][0]; p3.y = vertex[faces[i][2]][1];
+
+        drawTriangle(p1, p2, p3);
+
+        i++;
+    }
+}
 
 
 #endif // _MYGL_H_

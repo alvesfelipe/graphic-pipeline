@@ -131,7 +131,7 @@ void printVector(obj_vector *v, ofstream *saida)
 //-----------------------------------------------------------------------------
 // Esta funcao apenas imprime informacoes referentes ao modelo que foi carregado, 
 // tais como numero de vertices, normais, fontes de luz, etc.
-void PrintModelInfo(objLoader* ptr, ofstream *saida)
+void PrintModelInfo(objLoader* ptr, ofstream *saida, ofstream *faces)
 {	
 	/*
 	printf("Number of vertices: %i\n", ptr->vertexCount);
@@ -146,21 +146,28 @@ void PrintModelInfo(objLoader* ptr, ofstream *saida)
 		printf("\n");
 
 	}
-	/*
+	
 	printf("Number of faces: %i\n", ptr->faceCount);
 	for(int i=0; i<ptr->faceCount; i++)
 	{
 		obj_face *o = ptr->faceList[i];
-		printf(" face ");
+
+		//printf(" face ");
 		for(int j=0; j<3; j++)
 		{
-			printVector(ptr->vertexList[ o->vertex_index[j] ]);
+			//printVector(ptr->vertexList[ o->vertex_index[j] ], saida);
+			cout << o->vertex_index[j];
+			cout << " ";
+			*faces << o->vertex_index[j];
+			*faces << " ";
 		}
 		printf("\n");
+		*faces << "\n";
 	}
-
+	
 	printf("\n");
 	
+	/*	
 	printf("Number of spheres: %i\n", ptr->sphereCount);
 	for(int i=0; i<ptr->sphereCount; i++)
 	{
@@ -310,15 +317,18 @@ int main(int argc, char *argv[])
 	//argumento 
 	if(argc > 2){
 		if(strcmp(argv[2], "saida") == 0){
-			ofstream saida;
-			ofstream *p_saida;
+			ofstream saida, faces;
+			ofstream *p_saida, *p_faces;
 
 			p_saida = &saida;
-			
+			p_faces = &faces;	
+
 			saida.open("../pipeline/files/saida.txt");
+			faces.open("../pipeline/files/faces.txt");	
 			//*p_saida << "testeeeee222222";	
-			PrintModelInfo(objData, p_saida);
+			PrintModelInfo(objData, p_saida, p_faces);
 			saida.close();
+			faces.close();
 			flag = false;
 		}
 	}	
