@@ -58,6 +58,19 @@ void putPixel(Pixel p, Pixel cor){
 	}	
 }
 
+void clearScreen(){
+
+    for(int i=0; i<IMAGE_HEIGHT - 1; i++){
+        for (int j = 0; j < IMAGE_WIDTH - 1; ++j){
+
+            FBptr[posicaoPixel(i, j)+0] = 0;
+            FBptr[posicaoPixel(i, j)+1] = 0;
+            FBptr[posicaoPixel(i, j)+2] = 0;
+            FBptr[posicaoPixel(i, j)+3] = 255;
+        }
+    }    
+}
+
 int delta(int x0, int x1){
 	
 	int delta = x1 - x0;
@@ -166,7 +179,7 @@ void drawTriangle(Pixel p0, Pixel p1, Pixel p2){
 	drawLine(p2,p0);
 }
 
-void printVectorPixel(std::vector<glm::vec4> v){
+void printVectorPixel(vector<glm::vec4> v){
     Pixel p;
     int i = 0;
 
@@ -184,13 +197,13 @@ void printVectorPixel(std::vector<glm::vec4> v){
     }
 }
 
-void printTriangles(std::vector<glm::vec4> vertex, std::vector<glm::vec3> faces){
+void printTriangles(vector<glm::vec4> vertex, vector<glm::vec3> faces){
     Pixel p1, p2, p3;
     int i = 0;
 
     p1.RGBA[0] = 0; p1.RGBA[1] = 255; p1.RGBA[2] = 0; p1.RGBA[3] = 255;
-    p2.RGBA[0] = 0; p2.RGBA[1] = 255; p2.RGBA[2] = 0; p2.RGBA[3] = 255;
-    p3.RGBA[0] = 0; p3.RGBA[1] = 255; p3.RGBA[2] = 0; p3.RGBA[3] = 255;
+    p2.RGBA[0] = 255; p2.RGBA[1] = 0; p2.RGBA[2] = 0; p2.RGBA[3] = 255;
+    p3.RGBA[0] = 0; p3.RGBA[1] = 0; p3.RGBA[2] = 255; p3.RGBA[3] = 255;
 
     while(i != faces.size()){
         p1.x = vertex[faces[i][0]][0]; p1.y = vertex[faces[i][0]][1];   
@@ -202,7 +215,22 @@ void printTriangles(std::vector<glm::vec4> vertex, std::vector<glm::vec3> faces)
         i++;
     }
 }
+void rotateVector(vector<glm::vec4> vertex, vector<glm::vec3> faces, float angle){
+    
+    Pipeline* p = new Pipeline();
+    vector<glm::vec4> aux;
+    int i=0;
+    
+    while(i != vertex.size()){
+        aux.push_back(p->printScreen(p->modelViewProjection(glm::vec3(0,0,5), glm::vec3(0,0,0), glm::vec3(0,1,0), 3.0, vertex[i][0], vertex[i][1], vertex[i][2], 1) * p->rotateZ(angle), 512, 512));
+        i++;
+    } 
 
+    printTriangles(aux, faces);
+
+    i=0;
+    aux.empty();
+    
+}
 
 #endif // _MYGL_H_
-

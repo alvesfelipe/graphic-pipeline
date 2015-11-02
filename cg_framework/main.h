@@ -35,6 +35,10 @@ void display(void)
 
 	glViewport(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glTranslatef(1.0f, 0.0f, 0.0f);
+    //glRotatef(1, 0, 1, 0);
+
 	glBegin(GL_TRIANGLES);
 		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(-1.0f,-1.0f, 0.0f);

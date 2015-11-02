@@ -8,6 +8,7 @@
 #include "../libs/glm-0.9.7.1/glm/gtc/type_ptr.hpp" // glm::value_ptr
 #include "../libs/glm-0.9.7.1/glm/glm.hpp"
 #include "../libs/glm-0.9.7.1/glm/gtx/string_cast.hpp"
+#include "../libs/glm-0.9.7.1/glm/gtx/rotate_vector.hpp"
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
@@ -27,7 +28,7 @@ class Pipeline{
 		glm::mat4 translateMatrix(float x, float y, float z);
 		glm::mat4 scaleMatrix(float x, float y, float z);
 		glm::mat4 rotateX(float angle);
-		glm::mat4 rotateY(float angle);	
+		glm::mat4 rotateY(float angle);
 		glm::mat4 rotateZ(float angle);
 
 		//view functions
@@ -48,6 +49,9 @@ class Pipeline{
 
 		//set vector with all vertex
 		vector<glm::vec4> setVector(char *argv[]);
+
+		//set vector with all original vertex
+		vector<glm::vec4> setOriginalVector(char *argv[]);
 
 		//set vector with all faces
 		vector<glm::vec3> setFaces(char *argv[]);

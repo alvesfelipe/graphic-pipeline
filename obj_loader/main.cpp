@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <string>
 #include <fstream>
+#include <unistd.h>
 #include "objLoader.h"
 
 using namespace std;
@@ -49,7 +50,7 @@ void display(void)
 	// Verde: eixo Y
 	// Azul: eixo Z
 	///////////////////////////////////////////////////////////////////////////
-
+	
 	glBegin(GL_LINES);
 			glColor3f(1.0f, 0.0f, 0.0f);	// eixo X
 			glVertex3f(0.0f, 0.0f, 0.0f);
@@ -345,8 +346,6 @@ int main(int argc, char *argv[])
 		glutCreateWindow("OBJ Loader");
 
 		glutDisplayFunc(display);
-
-		atexit(FreeMemFunc);
 
 		glutMainLoop();
 	}

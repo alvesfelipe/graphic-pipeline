@@ -150,6 +150,23 @@ vector<glm::vec4> Pipeline::setVector(char *argv[]){
 	return vectors;
 }
 
+vector<glm::vec4> Pipeline::setOriginalVector(char *argv[]){
+	vector<glm::vec4> vectors;
+	ifstream readSaida;
+	float x, y, z;			
+
+	readSaida.open(argv[1]);
+
+	if(readSaida.is_open()){
+		while(readSaida >>x>>y>>z)
+			vectors.push_back(glm::vec4(x, y, z, 1));
+	}
+	readSaida.close();
+
+	return vectors;
+}
+
+
 vector<glm::vec3> Pipeline::setFaces(char *argv[]){
 	
 	vector<glm::vec3> faces;
@@ -183,6 +200,4 @@ void Pipeline::printPixels(vector<glm::vec4> vectors){
 		cout << glm::to_string(v) << endl;
 		i++;
 	}
-
 }
-
