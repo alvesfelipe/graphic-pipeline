@@ -130,7 +130,7 @@ glm::vec4 Pipeline::printScreen(glm::vec4 canonical, int width, int heigth){
 	glm::mat4 scale (glm::vec4(width/2, 0, 0, 0), glm::vec4(0, heigth/2, 0, 0), glm::vec4(0, 0, 1, 0), glm::vec4(0, 0, 0, 1));
 
 	glm::mat4 translate (glm::vec4(1, 0, 0, (width-1)/2), glm::vec4(0, 1, 0, (heigth-1)/2), glm::vec4(0, 0, 1, 0), glm::vec4(0, 0, 0, 1));
-
+	
 	return canonical * intvertY * scale * translate;
 }
 

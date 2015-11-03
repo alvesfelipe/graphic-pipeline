@@ -215,7 +215,41 @@ void printTriangles(vector<glm::vec4> vertex, vector<glm::vec3> faces){
         i++;
     }
 }
-void rotateVector(vector<glm::vec4> vertex, vector<glm::vec3> faces, float angle){
+void rotateVectorX(vector<glm::vec4> vertex, vector<glm::vec3> faces, float angle){
+    
+    Pipeline* p = new Pipeline();
+    vector<glm::vec4> aux;
+    int i=0;
+    
+    while(i != vertex.size()){
+        aux.push_back(p->printScreen(p->modelViewProjection(glm::vec3(0,0,5), glm::vec3(0,0,0), glm::vec3(0,1,0), 3.0, vertex[i][0], vertex[i][1], vertex[i][2], 1) * p->rotateX(angle), 512, 512));
+        i++;
+    } 
+
+    printTriangles(aux, faces);
+
+    i=0;
+    aux.empty();   
+}
+
+void rotateVectorY(vector<glm::vec4> vertex, vector<glm::vec3> faces, float angle){
+    
+    Pipeline* p = new Pipeline();
+    vector<glm::vec4> aux;
+    int i=0;
+    
+    while(i != vertex.size()){
+        aux.push_back(p->printScreen(p->modelViewProjection(glm::vec3(0,0,5), glm::vec3(0,0,0), glm::vec3(0,1,0), 3.0, vertex[i][0], vertex[i][1], vertex[i][2], 1) * p->rotateY(angle), 512, 512));
+        i++;
+    } 
+
+    printTriangles(aux, faces);
+
+    i=0;
+    aux.empty();   
+}
+
+void rotateVectorZ(vector<glm::vec4> vertex, vector<glm::vec3> faces, float angle){
     
     Pipeline* p = new Pipeline();
     vector<glm::vec4> aux;
@@ -229,8 +263,7 @@ void rotateVector(vector<glm::vec4> vertex, vector<glm::vec3> faces, float angle
     printTriangles(aux, faces);
 
     i=0;
-    aux.empty();
-    
+    aux.empty();   
 }
 
 #endif // _MYGL_H_

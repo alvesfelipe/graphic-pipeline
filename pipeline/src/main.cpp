@@ -9,14 +9,14 @@ vector<glm::vec3> faces;
 float angle = 0.0;	
 
 void MyGlDraw(void){
-	
-	angle +=1.0;
-	sleep(1);
+
+	angle +=0.01;	
+
+	//sleep(1);
 	clearScreen();	
-	rotateVector(originalVectors, faces, angle);
+	rotateVectorZ(originalVectors, faces, angle);
 	//printTriangles(vectors, faces);	
-	//printVectorPixel(vectors);
-	
+	//printVectorPixel(vectors);	
 }
 
 int main(int argc, char *argv[]){

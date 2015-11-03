@@ -22,9 +22,13 @@ objLoader *objData;
 unsigned int ViewPortWidth  = 512;
 unsigned int ViewPortHeight = 512;
 
+float angle = 0.0;
+	
 //-----------------------------------------------------------------------------
 void display(void)
 {
+	angle += 0.2;
+
 	glViewport(0, 0, ViewPortWidth, ViewPortHeight);
 
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -51,6 +55,8 @@ void display(void)
 	// Azul: eixo Z
 	///////////////////////////////////////////////////////////////////////////
 	
+  	glRotatef(angle, 0.0f, 0.0f, 1.0f);
+	
 	glBegin(GL_LINES);
 			glColor3f(1.0f, 0.0f, 0.0f);	// eixo X
 			glVertex3f(0.0f, 0.0f, 0.0f);
@@ -72,6 +78,8 @@ void display(void)
 	///////////////////////////////////////////////////////////////////////////
 
 	glColor3f(1.0f, 1.0f, 1.0f);
+
+  	glRotatef(angle, 0.0f, 0.0f, 1.0f);
 
 	glBegin(GL_LINES);
 		for(int i=0; i<objData->faceCount; i++)
